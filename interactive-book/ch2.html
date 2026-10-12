@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>บทที่ 2 ห้องปฏิบัติการจำลอง · ห้องเรียนการสกัดกาแฟ</title>
+<meta name="description" content="ปรับขนาดบด อุณหภูมิ อัตราส่วน เวลา และการกวน แล้วดูผลบนแผนภูมิควบคุมการชง พร้อมแบบฝึกหัดฝึกแก้รสชาติ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&family=Noto+Serif+Thai:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/book.css">
+<script>try{var d=document.documentElement,t=localStorage.getItem('book.theme'),m=localStorage.getItem('book.mode');if(t)d.setAttribute('data-theme',JSON.parse(t));if(m&&JSON.parse(m)==='visual')d.setAttribute('data-mode','visual');}catch(e){}</script>
+</head>
+<body class="book" data-page="ch2">
+<main class="page" id="main"><div class="page-inner">
+<header class="chapter-open">
+  <span class="ch-num" aria-hidden="true">2</span>
+  <p class="ch-label">บทที่ 2 · Chapter 2</p>
+  <h1>ห้องปฏิบัติการจำลอง</h1>
+  <p class="ch-en">The Pour-Over Lab</p>
+  <p class="ch-lead">ลากแถบเลื่อนเพื่อจำลองสูตรของคุณ แล้วดูว่าผลการสกัดเคลื่อนไปทางใดบนแผนภูมิควบคุมการชง ก่อนจะลองแก้แก้วที่มีปัญหาในแบบฝึกหัดท้ายบท</p>
+</header>
+
+<article class="prose">
+<div data-obj="ch2"></div>
+
+<h2 id="s2-1"><span class="sec-no">2.1</span>ก่อนเริ่มทดลอง</h2>
+<p class="gist">ขวา = ขม · บน = เข้ม · ช่องกลาง = ดีที่สุด</p>
+<aside class="sidenote"><span class="sn-label">ที่มาของกรอบ</span>แบบจำลองนี้อ้างอิงความสัมพันธ์เชิงแนวคิดตาม Brewing Control Chart ของ SCA: ค่าสกัดที่แนะนำอยู่ระหว่าง 18–22% และ TDS ที่แนะนำอยู่ระหว่าง 1.15–1.35% ตัวเลขที่คำนวณได้เป็นค่าประมาณเพื่อการเรียนรู้ ไม่ใช่ผลวัดจากเครื่อง <a class="term" data-term="refractometer" href="appendix.html#g-refractometer">refractometer</a> จริง</aside>
+<p>ห้องปฏิบัติการในบทนี้จำลองการชงแบบดริปด้วยตัวแปรห้าตัว ได้แก่ ขนาดบด อุณหภูมิน้ำ อัตราส่วนกาแฟต่อน้ำ เวลาสกัด และการกวน แล้ววางผลลงบน<a class="term" data-term="bcc" href="appendix.html#g-bcc">แผนภูมิควบคุมการชง</a>ของ SCA<sup class="cite"><a href="appendix.html#ref-3" data-ref="3">3</a></sup> แกนนอนคือ <a class="term" data-term="ey" href="appendix.html#g-ey">EY</a> (ไปทางขวา = สกัดมากขึ้น เสี่ยงขม) แกนตั้งคือ <a class="term" data-term="tds" href="appendix.html#g-tds">TDS</a> (ขึ้นบน = เข้มขึ้น)</p>
+<div class="callout warn">
+  <span class="callout-label">อ่านก่อนทดลอง — แบบจำลองเพื่อการเรียนรู้</span>
+  <p><strong>เวลาในการชงจริงเป็นผลลัพธ์ ไม่ใช่ตัวที่ตั้งได้เอง:</strong> ปรับเบอร์บดให้ละเอียดขึ้น น้ำจะไหลช้าลงและเวลาก็ยาวตาม ในห้องปฏิบัติการนี้แยกเวลาออกมาให้ปรับเองเพื่อดูผลของมันทีละตัว</p>
+  <p><strong>ตัวเลขเป็นค่าประมาณ ไม่ใช่ค่าวัดจริง:</strong> EY คำนวณจากสูตรอย่างง่ายและถูกจำกัดในช่วง 14–26% ส่วน TDS คิดจาก EY และน้ำกาแฟที่ได้จริง โดยหักน้ำที่ผงกาแฟอมไว้ราว 2 เท่าของน้ำหนักกาแฟ (สูตรเดียวกับ<a href="ch1.html#s1-3">หัวข้อ 1.3</a>) ใช้ดูทิศทางว่าตัวแปรไหนทำให้ผลขยับไปทางใด ไม่ควรใช้ทำนายค่าที่ได้จากการชงจริง</p>
+</div>
+<figure class="fig read-map">
+  <div class="fig-body"><svg viewBox="0 0 520 250" role="img" aria-label="แผนผังเก้าช่องสำหรับอ่านแผนภูมิควบคุมการชง: แกนนอน EY แบ่งเป็นเปรี้ยว สมดุล ขม แกนตั้ง TDS แบ่งเป็นบาง พอดี เข้ม ช่องกลางคือจุดทองคำ"><rect x="70" y="20" width="140" height="180" fill="var(--sage)" fill-opacity=".10"/><text x="140.0" y="55.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--sage)" font-family="IBM Plex Sans Thai Looped, sans-serif">เข้ม + เปรี้ยวฝาด</text><text x="140.0" y="115.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--sage)" font-family="IBM Plex Sans Thai Looped, sans-serif">พอดี + เปรี้ยวนำ</text><text x="140.0" y="175.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--sage)" font-family="IBM Plex Sans Thai Looped, sans-serif">บาง + เปรี้ยวนำ</text><rect x="210" y="20" width="140" height="180" fill="var(--gold)" fill-opacity=".10"/><text x="280.0" y="55.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--gold)" font-family="IBM Plex Sans Thai Looped, sans-serif">เข้ม + สมดุล</text><rect x="210" y="80" width="140" height="60" fill="var(--gold)" fill-opacity=".28" stroke="var(--gold)" stroke-width="2" stroke-dasharray="5 3"/><text x="280.0" y="115.0" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)" font-family="IBM Plex Sans Thai Looped, sans-serif">จุดทองคำ</text><text x="280.0" y="175.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--gold)" font-family="IBM Plex Sans Thai Looped, sans-serif">บาง + สมดุล</text><rect x="350" y="20" width="140" height="180" fill="var(--rust)" fill-opacity=".10"/><text x="420.0" y="55.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--rust)" font-family="IBM Plex Sans Thai Looped, sans-serif">เข้ม + ขมจัด</text><text x="420.0" y="115.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--rust)" font-family="IBM Plex Sans Thai Looped, sans-serif">พอดี + ขมนำ</text><text x="420.0" y="175.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--rust)" font-family="IBM Plex Sans Thai Looped, sans-serif">บาง + ขมปลายลิ้น</text><g stroke="var(--line)" stroke-width="1" stroke-dasharray="3 3"><line x1="210" y1="20" x2="210" y2="200"/><line x1="350" y1="20" x2="350" y2="200"/><line x1="70" y1="80" x2="490" y2="80"/><line x1="70" y1="140" x2="490" y2="140"/></g><path d="M70 14V200H496" fill="none" stroke="var(--ink-dim)" stroke-width="1.5"/><path d="M496 196l8 4-8 4zM66 14l4-8 4 8z" fill="var(--ink-dim)"/><g font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Mono, monospace" text-anchor="middle"><text x="210" y="216">18%</text><text x="350" y="216">22%</text></g><g font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Mono, monospace" text-anchor="end"><text x="64" y="84">1.35%</text><text x="64" y="144">1.15%</text></g><text x="280" y="240" text-anchor="middle" font-size="12.5" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">Extraction Yield — สกัดมากขึ้น (เปรี้ยว → ขม) →</text><text x="-110" y="18" transform="rotate(-90)" text-anchor="middle" font-size="12.5" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">TDS — เข้มขึ้น →</text></svg></div>
+  <figcaption><span class="fig-label">รูปที่ 2.1</span>วิธีอ่านแผนภูมิควบคุมการชง: ตำแหน่งของจุดบอกทั้งระดับการสกัด (ซ้าย–ขวา) และความเข้มข้น (ล่าง–บน) ป้ายในแต่ละช่องตรงกับผลที่ห้องปฏิบัติการจะแสดง</figcaption>
+</figure>
+
+<h2 id="s2-2"><span class="sec-no">2.2</span>ทดลองปรับตัวแปร</h2>
+<p class="dek">เริ่มจากสูตรตัวอย่าง แล้วปรับทีละตัว สังเกตจุดบนกราฟ ถ้วยจำลอง และคำอธิบายผลที่เปลี่ยนตาม</p>
+<p class="gist">ลากตัวเลื่อน ดูจุดเคลื่อน</p>
+
+<figure class="fig wide" id="lab-fig">
+  <div class="lab" id="lab">
+    <div class="exercise" id="exercise">
+      <div class="ex-head">
+        <span class="ex-label">แบบฝึกหัด 2.1</span>
+        <span class="ex-title">ฝึกแก้รสชาติ (Dial-in Challenge)</span>
+        <button class="btn primary small" id="ch-start" type="button">เริ่มโจทย์</button>
+      </div>
+      <p class="ex-intro" id="ch-intro">ระบบจะให้แก้วที่มีปัญหามาหนึ่งแก้ว ปรับแถบเลื่อนด้านล่างให้ EY อยู่ที่ 18–22% และ TDS 1.15–1.35% ภายใน 5 ครั้ง (ดูคำอธิบายในหัวข้อ 2.3)</p>
+      <div id="ch-active" hidden>
+        <p class="ex-problem"><strong id="ch-title"></strong><span id="ch-desc"></span></p>
+        <div class="ex-meta">
+          <span>เป้าหมาย <span class="mono">EY 18–22% · TDS 1.15–1.35%</span></span>
+          <span class="ch-moves" id="ch-moves" aria-live="polite"></span>
+        </div>
+        <div class="ex-actions">
+          <button class="btn small" id="ch-hint" type="button">ขอคำใบ้</button>
+          <button class="btn small" id="ch-giveup" type="button">ยอมแพ้</button>
+        </div>
+        <p class="ex-hint" id="ch-hint-text" hidden></p>
+      </div>
+      <div class="verdict ex-result" id="ch-result" hidden aria-live="polite">
+        <span class="verdict-tag" id="ch-result-tag"></span>
+        <h4 id="ch-result-title"></h4>
+        <p id="ch-result-body"></p>
+      </div>
+    </div>
+
+    <div class="lab-bar">
+      <span class="lb-label">สูตรตัวอย่าง</span>
+      <button class="btn small preset-btn" data-preset="under" type="button">สกัดน้อยไป (เปรี้ยว)</button>
+      <button class="btn small preset-btn" data-preset="balanced" type="button">จุดสมดุล</button>
+      <button class="btn small preset-btn" data-preset="over" type="button">สกัดมากไป (ขม)</button>
+      <button class="btn small preset-btn" data-preset="reset" type="button">รีเซ็ตค่าเริ่มต้น</button>
+    </div>
+
+    <div class="lab-grid">
+      <div class="lab-controls"><div class="lab-controls-inner">
+        <h3 class="lab-h">ตัวแปรการชง<span class="sub">ลากแถบเลื่อนเพื่อจำลองสูตรของคุณ</span></h3>
+        <figure class="rig-fig" aria-label="ภาพจำลองสูตรปัจจุบัน"><svg viewBox="0 0 330 178" id="rig" role="img" aria-label="ภาพจำลองที่เปลี่ยนตามแถบเลื่อน: ขนาดผงกาแฟในดริปเปอร์ เทอร์โมมิเตอร์ สายน้ำและการกวน ความเข้มของน้ำกาแฟ และเวลาสกัด">
+          <defs><clipPath id="rig-clip"><path d="M117 60 H203 L171 108 H149 Z"/></clipPath><clipPath id="rig-server-clip"><rect x="128" y="122" width="64" height="40" rx="7"/></clipPath></defs>
+          <rect x="29" y="18" width="12" height="108" rx="6" fill="var(--paper-2)" stroke="var(--line)" stroke-width="2"/>
+          <circle cx="35" cy="136" r="12" fill="var(--paper-2)" stroke="var(--line)" stroke-width="2"/>
+          <rect id="rig-therm" x="32" y="60" width="6" height="70" rx="3" fill="var(--gold)"/>
+          <circle id="rig-bulb" cx="35" cy="136" r="8.5" fill="var(--gold)"/>
+          <g stroke="var(--ink-dim)" stroke-width="1.2"><line x1="44" y1="36" x2="50" y2="36"/><line x1="44" y1="78" x2="50" y2="78"/><line x1="44" y1="120" x2="50" y2="120"/></g>
+          <g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--ink-dim)"><text x="53" y="39">96</text><text x="53" y="81">88</text><text x="53" y="123">80</text></g>
+          <text id="rig-temp-txt" x="35" y="168" text-anchor="middle" font-size="12" font-weight="700" fill="var(--coffee-strong)" font-family="IBM Plex Mono, monospace">93°C</text>
+          <path d="M96 4 q30 4 52 12" fill="none" stroke="var(--coffee)" stroke-width="5" stroke-linecap="round"/>
+          <path id="rig-stream" d="M150 18 q10 18 10 40" fill="none" stroke="var(--caramel)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M108 52 H212 L174 112 H146 Z" fill="var(--paper-2)" stroke="var(--coffee)" stroke-width="2.5" stroke-linejoin="round"/>
+          <line x1="102" y1="52" x2="218" y2="52" stroke="var(--coffee)" stroke-width="3.5" stroke-linecap="round"/>
+          <g id="rig-bed" clip-path="url(#rig-clip)"></g>
+          <g id="rig-swirl" fill="none" stroke="var(--caramel)" stroke-width="1.8" stroke-linecap="round">
+            <path d="M146 61 a14 4 0 1 0 28 0"/><path d="M136 63 a24 6.5 0 1 0 48 0"/><path d="M126 65 a34 9 0 1 0 68 0"/>
+          </g>
+          <rect x="144" y="112" width="32" height="6" rx="2" fill="var(--coffee)"/>
+          <rect x="128" y="122" width="64" height="40" rx="7" fill="var(--paper)" stroke="var(--coffee)" stroke-width="2.5"/>
+          <rect id="rig-liquid" x="128" y="132" width="64" height="30" fill="var(--coffee)" clip-path="url(#rig-server-clip)"/>
+          <text id="rig-ratio-txt" x="160" y="176" text-anchor="middle" font-size="11" font-weight="700" fill="var(--coffee-strong)" font-family="IBM Plex Mono, monospace">1:17.5</text>
+          <text x="226" y="96" font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">ผงกาแฟ</text>
+          <text id="rig-grind-txt" x="226" y="110" font-size="11.5" font-weight="700" fill="var(--coffee-strong)" font-family="IBM Plex Sans Thai Looped, sans-serif">บดกลาง</text>
+          <circle cx="282" cy="38" r="26" fill="none" stroke="var(--line)" stroke-width="5"/>
+          <path id="rig-arc" d="" fill="none" stroke="var(--coffee)" stroke-width="5" stroke-linecap="round"/>
+          <text id="rig-time-txt" x="282" y="42" text-anchor="middle" font-size="12" font-weight="700" fill="var(--coffee-strong)" font-family="IBM Plex Mono, monospace">2:30</text>
+          <text x="282" y="80" text-anchor="middle" font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">เวลาสกัด</text>
+          <text x="226" y="140" font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">สีน้ำกาแฟ</text>
+          <text x="226" y="154" font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">= ความเข้มข้น</text>
+        </svg></figure>
+      <div class="control">
+        <div class="control-head">
+          <span class="control-label">ขนาดบด<span class="en">Grind size</span></span>
+          <span class="control-value mono" id="val-grind">5 / 10</span>
+        </div>
+        <input type="range" id="grind" min="1" max="10" step="1" value="5">
+        <div class="scale-labels"><span>ละเอียดมาก</span><span>หยาบมาก</span></div>
+      </div>
+
+      <div class="control">
+        <div class="control-head">
+          <span class="control-label">อุณหภูมิน้ำ<span class="en">Water temperature</span></span>
+          <span class="control-value mono" id="val-temp">93°C</span>
+        </div>
+        <input type="range" id="temp" min="80" max="96" step="1" value="93">
+        <div class="scale-labels"><span>80°C</span><span>96°C</span></div>
+        <p class="range-note">ช่วงที่ใช้บ่อยกับดริป ส่วนกาแฟคั่วอ่อนบางสูตรใช้น้ำถึง 99–100°C</p>
+      </div>
+
+      <div class="control">
+        <div class="control-head">
+          <span class="control-label">อัตราส่วนกาแฟ:น้ำ<span class="en">Coffee-to-water ratio</span></span>
+          <span class="control-value mono" id="val-ratio">1 : 17.5</span>
+        </div>
+        <input type="range" id="ratio" min="12" max="20" step="0.5" value="17.5">
+        <div class="scale-labels"><span>1:12 เข้ม</span><span>1:20 เจือจาง</span></div>
+      </div>
+
+      <div class="control">
+        <div class="control-head">
+          <span class="control-label">เวลาสกัดรวม<span class="en">Total brew time</span></span>
+          <span class="control-value mono" id="val-time">2:30</span>
+        </div>
+        <input type="range" id="time" min="90" max="240" step="5" value="150">
+        <div class="scale-labels"><span>1:30</span><span>4:00</span></div>
+      </div>
+
+      <div class="control">
+        <div class="control-head">
+          <span class="control-label">การกวน/รินน้ำ<span class="en">Agitation</span></span>
+          <span class="control-value mono" id="val-agitation">5 / 10</span>
+        </div>
+        <input type="range" id="agitation" min="0" max="10" step="1" value="5">
+        <div class="scale-labels"><span>เบา นิ่ง</span><span>แรง วนถี่</span></div>
+      </div>
+      </div></div>
+
+      <div class="lab-results">
+        <div class="lab-block">
+          <h3 class="lab-h">ก · ผลการสกัด<span class="sub">ตำแหน่งบนแผนภูมิควบคุมการชง (Brewing Control Chart)</span></h3>
+        <div class="results-top">
+          <div class="chart-box">
+            <svg viewBox="0 0 460 340" id="chart" role="img" aria-label="กราฟแสดง Extraction Yield กับ TDS"></svg>
+          </div>
+          <div class="cup-box">
+            <svg viewBox="0 0 100 120" id="cup" role="img" aria-label="สัดส่วนกรด น้ำตาล-บอดี้ และขมฝาดในถ้วย"></svg>
+            <p class="cup-caption">สัดส่วนสารที่สกัดได้<br>ในถ้วยจำลอง</p>
+            <ul class="cup-legend" id="cup-legend">
+              <li><span class="dot" style="background:var(--sage)"></span>กรด <span class="mono" id="leg-acid">0%</span></li>
+              <li><span class="dot" style="background:var(--gold)"></span>หวาน/บอดี้ <span class="mono" id="leg-sugar">0%</span></li>
+              <li><span class="dot" style="background:var(--rust)"></span>ขม/ฝาด <span class="mono" id="leg-tannin">0%</span></li>
+            </ul>
+          </div>
+        </div>
+          <div class="metrics">
+            <div class="metric"><div class="k">Extraction Yield</div><div class="v" id="m-ey">20.5%</div></div>
+            <div class="metric"><div class="k">TDS โดยประมาณ</div><div class="v" id="m-tds">1.28%</div></div>
+            <div class="metric"><div class="k">โซนบนกราฟ</div><div class="v text" id="m-zone">สมดุล</div></div>
+          </div>
+          <div class="verdict" id="verdict" aria-live="polite">
+            <span class="verdict-tag" id="verdict-tag">จุดทองคำ</span>
+            <h4 id="verdict-title">กลมกล่อม สมดุลตามหลัก SCA</h4>
+            <p id="verdict-body"></p>
+          </div>
+        </div>
+
+        <div class="lab-block seq-box">
+          <h3 class="lab-h">ข · ลำดับการสกัดตามขนาดโมเลกุล<span class="sub">น้ำไม่ได้ดึงทุกรสชาติออกมาพร้อมกัน — โมเลกุลเล็กละลายก่อน โมเลกุลใหญ่ละลายทีหลัง (เทียบรูปที่ 1.2)</span></h3>
+          <svg viewBox="0 0 460 132" id="sequence" role="img" aria-label="แผนภาพลำดับการสกัดสารตามขนาดโมเลกุล"></svg>
+          <p class="seq-caption" id="sequence-caption"></p>
+        </div>
+
+        <div class="lab-block">
+          <h3 class="lab-h">ค · ผลกระทบของแต่ละตัวแปรตอนนี้<span class="sub">ทิศทางที่แต่ละตัวแปรกำลังดึงรสชาติไป ตามหลักการสกัดกาแฟ</span></h3>
+          <ul class="factor-list" id="factor-list"></ul>
+        </div>
+
+        <div class="lab-block trail" aria-label="เส้นทางการชงหลายรอบ">
+          <div class="trail-head">
+            <h3 class="lab-h" style="margin:0">ง · เส้นทางการชงหลายรอบ</h3>
+            <div class="ex-actions" style="margin:0">
+              <button class="btn small" id="trail-save" type="button">+ บันทึกรอบนี้</button>
+              <button class="btn small" id="trail-clear" type="button">ล้างเส้นทาง</button>
+            </div>
+          </div>
+          <p class="trail-hint">ปรับตัวแปรทีละตัว แล้วกด “บันทึกรอบนี้” ซ้ำ ๆ จะเห็นว่าแต่ละตัวพาจุดไปทางไหน คลิกแถวในตารางเพื่อโหลดค่ารอบนั้นกลับมา</p>
+          <div class="tbl-wrap" style="margin:0">
+            <table class="tbl" id="trail-table" hidden>
+              <thead><tr><th>#</th><th>สิ่งที่เปลี่ยน</th><th>EY</th><th>TDS</th></tr></thead>
+              <tbody id="trail-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <figcaption><span class="badge-live">โต้ตอบได้</span><span class="fig-label">รูปที่ 2.2</span>ห้องปฏิบัติการจำลองการชงแบบดริป ภาพประกอบด้านซ้ายเปลี่ยนตามแถบเลื่อน ค่าทางขวาคำนวณจากแบบจำลองอย่างง่ายเพื่อดูทิศทางของผล</figcaption>
+</figure>
+
+<h2 id="s2-3"><span class="sec-no">2.3</span>แบบฝึกหัด: ฝึกแก้รสชาติ</h2>
+<p class="dek">วินิจฉัยแก้วที่มีปัญหา แล้วปรับให้เข้ากรอบสมดุลภายใน 5 ครั้ง</p>
+<p class="gist">แก้ EY ก่อน แล้วคุม TDS</p>
+<p>แบบฝึกหัด 2.1 จะสุ่มแก้วที่มีปัญหามาหนึ่งแก้ว พร้อมอาการที่ชิมได้ ผู้อ่านต้องปรับตัวแปรในรูปที่ 2.2 จนจุดเข้ากรอบที่ SCA แนะนำ คือ EY 18–22% และ TDS 1.15–1.35% การปล่อยแถบเลื่อนแต่ละครั้งนับเป็นหนึ่งครั้ง ครบ 5 ครั้งแล้วยังไม่เข้ากรอบจะเฉลยแนวทางให้</p>
+<p>ลำดับการคิดที่ช่วยได้:</p>
+<ol class="flow">
+  <li><strong>อ่านอาการ</strong> — เปรี้ยว จืด ติดคอสั้น คือสกัดน้อยไป ขม ฝาด แห้งคอ คือสกัดมากไป (ตารางที่ 1.1)</li>
+  <li><strong>แก้ EY ก่อน</strong> — ใช้ขนาดบด อุณหภูมิ เวลา หรือการกวน ดันจุดไปทางซ้ายหรือขวาให้อยู่ระหว่าง 18–22%</li>
+  <li><strong>แล้วคุม TDS</strong> — เมื่อ EY เข้าช่วงแล้ว ใช้อัตราส่วนน้ำเลื่อนจุดขึ้นหรือลงให้เข้ากรอบ</li>
+</ol>
+<p class="cta"><button class="btn primary" type="button" data-start-exercise>เริ่มโจทย์ในรูปที่ 2.2 ↑</button></p>
+<div class="callout note"><span class="callout-label">หมายเหตุ</span><p>เป็นแบบฝึกหัดจากแบบจำลองเพื่อการเรียนรู้ ไม่ใช่ผลวัดจริง เมื่อชงจริงแล้วเจออาการเหล่านี้ ดูสาเหตุทางกายภาพและวิธีแก้ได้ในหัวข้อ <a href="ch4.html#s4-4">4.4 วินิจฉัยอาการหน้าแก้ว</a></p></div>
+
+<div data-summary="ch2"></div>
+<div class="quiz" data-quiz="ch2"></div>
+<nav class="pager" data-auto></nav>
+<footer class="colophon" data-auto></footer>
+</article>
+</div></main>
+<script src="assets/data.js"></script>
+<script src="assets/book.js"></script>
+<script src="assets/lab.js"></script>
+</body>
+</html>

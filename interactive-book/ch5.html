@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>บทที่ 5 สูตรระดับโลก · ห้องเรียนการสกัดกาแฟ</title>
+<meta name="description" content="เปรียบเทียบสูตรดริปของแชมป์โลกและผู้เชี่ยวชาญ ทั้ง 4:6, Chad Wang, Five-Pour, George Peng, Neo, Hoffmann และ Scott Rao พร้อมตัวจับเวลา">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai+Looped:wght@400;500;600;700&family=Noto+Serif+Thai:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/book.css">
+<script>try{var d=document.documentElement,t=localStorage.getItem('book.theme'),m=localStorage.getItem('book.mode');if(t)d.setAttribute('data-theme',JSON.parse(t));if(m&&JSON.parse(m)==='visual')d.setAttribute('data-mode','visual');}catch(e){}</script>
+</head>
+<body class="book" data-page="ch5">
+<main class="page" id="main"><div class="page-inner">
+<header class="chapter-open">
+  <span class="ch-num" aria-hidden="true">5</span>
+  <p class="ch-label">บทที่ 5 · Chapter 5</p>
+  <h1>สูตรระดับโลก</h1>
+  <p class="ch-en">Global Brewing Formulas</p>
+  <p class="ch-lead">สูตรและสำนักคิดหลักที่เป็นที่ยอมรับในวงการกาแฟโลก อ่านหลักคิดของแต่ละสูตร แล้วปรับปริมาณกาแฟและเวลารวมเพื่อดูตารางเทน้ำเปลี่ยนตามจริง</p>
+</header>
+
+<article class="prose">
+<div data-obj="ch5"></div>
+
+<h2 id="s5-1"><span class="sec-no">5.1</span>เปรียบเทียบสูตรและหลักคิด</h2>
+<p class="dek">แต่ละสูตรเลือกอัตราส่วน อุณหภูมิ และจังหวะการเทต่างกัน เพราะมุ่งไปที่รสชาติต่างกัน</p>
+<p class="gist">1:14–1:17 · 88–100°C · แตะจุดเพื่อเลือกสูตร</p>
+<aside class="sidenote"><span class="sn-label">ข้อควรทราบ</span>ตัวเลขบางส่วนเป็นค่าประมาณจากสูตรที่เผยแพร่ต่อสาธารณะ ใช้เพื่อการเรียนรู้หลักคิดการสกัด ไม่ใช่สูตรทางการที่ยืนยันตัวเลขทุกจุดจากเจ้าของสูตร 100%</aside>
+<p>ตารางที่ 5.1 สรุปค่าตั้งต้นของทั้งเจ็ดสูตร ลองสังเกตว่า Scott Rao ใช้น้ำร้อนที่สุด (99–100°C) คู่กับอัตราส่วน 1:17 และบลูมด้วยน้ำ 3 เท่า ส่วน George Peng ใช้อัตราส่วนเข้มที่สุด (1:14) และลดอุณหภูมิเหลือ 88°C ในช่วงท้ายเพื่อลดรสฝาด แตะแถวใดก็ได้เพื่อเปิดสูตรนั้นในหัวข้อ 5.2</p>
+<figure class="fig visual-only"><div class="fig-body"><svg id="wr-map" viewBox="0 0 560 300" role="img" aria-label="แผนที่สูตร: อัตราส่วนน้ำต่อกาแฟกับอุณหภูมิน้ำของแต่ละสูตร แตะจุดเพื่อเลือกสูตร"></svg></div><figcaption><span class="badge-live">โต้ตอบได้</span></figcaption></figure>
+<div class="tbl-wrap read-only">
+  <p class="tbl-cap"><span class="badge-live">โต้ตอบได้</span><span class="fig-label">ตารางที่ 5.1</span>ค่าตั้งต้นของสูตรระดับโลก (ปริมาณกาแฟและเวลาเป็นค่าเริ่มต้นในหัวข้อ 5.2)</p>
+  <table class="tbl tbl-compare">
+    <thead><tr><th>สูตร</th><th>อัตราส่วน</th><th>ดริปเปอร์</th><th>อุณหภูมิน้ำ</th><th>กาแฟ · เวลา</th></tr></thead>
+    <tbody id="wr-compare"></tbody>
+  </table>
+</div>
+
+<h2 id="s5-2"><span class="sec-no">5.2</span>ชงตามสูตร</h2>
+<p class="dek">เลือกสูตร ปรับปริมาณกาแฟและเวลารวม แล้วกดเริ่มชงเพื่อจับเวลาไปพร้อมกับขั้นตอน</p>
+<p class="gist">เลือกสูตร แล้วกดเริ่มชง</p>
+<figure class="fig wide">
+  <div class="fig-body brew-panel">
+    <div class="wr-picker" id="wr-picker" role="group" aria-label="เลือกสูตร"></div>
+    <p class="wr-note" id="wr-philosophy"></p>
+    <p class="wr-source" id="wr-source"></p>
+    <div class="recipe-inputs">
+      <div class="control"><div class="control-head"><span class="control-label">ปริมาณกาแฟ<span class="en">Coffee dose</span></span><span class="control-value"><input type="number" id="wr-dose" min="10" max="50" step="1" value="15" class="dose-field" aria-label="ปริมาณกาแฟ (กรัม)"> g</span></div></div>
+      <div class="control"><div class="control-head"><span class="control-label">อัตราส่วน<span class="en">Brew ratio</span></span><span class="control-value" id="wr-ratio-label">1 : 15</span></div></div>
+      <div class="control"><div class="control-head"><span class="control-label">ดริปเปอร์<span class="en">Dripper</span></span><span class="control-value" id="wr-dripper-label" style="font-family:var(--sans);font-size:13.5px;white-space:normal;text-align:right">—</span></div></div>
+      <div class="control"><div class="control-head"><span class="control-label">อุณหภูมิน้ำ<span class="en">Water temp</span></span><span class="control-value" id="wr-temp-label">—</span></div></div>
+      <div class="control">
+        <div class="control-head"><span class="control-label">เวลาสกัดรวม<span class="en">Total brew time</span></span><span class="control-value" id="wr-time-val">2:30</span></div>
+        <input type="range" id="wr-time" min="90" max="300" step="5" value="150" aria-label="เวลาสกัดรวม">
+        <div class="scale-labels"><span>1:30</span><span>5:00</span></div>
+      </div>
+    </div>
+    <p class="recipe-water" id="wr-water"></p>
+    <div class="timer-bar">
+  <div class="timer-display"><span class="timer-elapsed" id="wr-timer-elapsed">0:00</span><span class="timer-total" id="wr-timer-total-label">/ 0:00</span></div>
+  <div class="timer-track"><div class="timer-fill" id="wr-timer-fill"></div></div>
+  <p class="timer-step-label" id="wr-timer-step-label" aria-live="polite">กดเริ่มชงเพื่อจับเวลาไปพร้อมกับขั้นตอน</p>
+  <div class="speed-row" role="group" aria-label="ความเร็วตัวจับเวลา"><span>ความเร็ว:</span><button type="button" class="speed-btn" data-speed="1" aria-pressed="true">เวลาจริง ×1</button><button type="button" class="speed-btn" data-speed="10" aria-pressed="false">เร่ง ×10</button><span class="speed-msg" aria-live="polite"></span></div>
+  <div class="timer-btns"><button class="btn primary" id="wr-timer-start" type="button">เริ่มชง ▶</button><button class="btn" id="wr-timer-pause" type="button" hidden>หยุดชั่วคราว ⏸</button><button class="btn" id="wr-timer-reset" type="button" hidden>รีเซ็ต ↺</button></div>
+</div>
+    <div class="profile-fig">
+  <div class="profile-head"><span class="profile-title">ปริมาณน้ำสะสมตามเวลา</span><span class="profile-legend"><i></i>น้ำที่เทแล้ว (g) · ตัวเลขในวงกลม = ขั้นที่</span></div>
+  <svg id="wr-profile" class="profile-svg" viewBox="0 0 600 190" role="img" aria-label="กราฟขั้นบันไดแสดงน้ำที่เทสะสมตามเวลาของแต่ละขั้น"></svg>
+</div>
+      <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+        <defs>
+          <symbol id="ico-dripper" viewBox="0 0 120 100">
+            <circle cx="60" cy="50" r="39" fill="var(--paper)" stroke="var(--coffee)" stroke-opacity=".55" stroke-width="2.5"/>
+            <circle cx="60" cy="50" r="33" fill="var(--paper-2)" stroke="var(--line)" stroke-width="1.5"/>
+            <g fill="none" stroke="var(--line)" stroke-width="1.6" stroke-linecap="round"><path d="M91.0,50.0 Q82.8,62.5 73.0,60.9"/><path d="M85.1,68.2 Q71.1,73.5 64.1,66.5"/><path d="M69.6,79.5 Q55.2,75.6 53.6,65.8"/><path d="M50.4,79.5 Q41.1,67.8 45.6,59.0"/><path d="M34.9,68.2 Q34.2,53.3 43.0,48.8"/><path d="M29.0,50.0 Q37.2,37.5 47.0,39.1"/><path d="M34.9,31.8 Q48.9,26.5 55.9,33.5"/><path d="M50.4,20.5 Q64.8,24.4 66.4,34.2"/><path d="M69.6,20.5 Q78.9,32.2 74.4,41.0"/><path d="M85.1,31.8 Q85.8,46.7 77.0,51.2"/></g>
+            <circle cx="60" cy="50" r="26" fill="var(--coffee)" fill-opacity="0.12"/>
+          </symbol>
+        </defs>
+      </svg>
+    <div class="recipe-cards" id="wr-cards"></div>
+  </div>
+  <figcaption><span class="badge-live">โต้ตอบได้</span><span class="fig-label">รูปที่ 5.1</span>ขั้นตอนของสูตรที่เลือก พร้อมกราฟปริมาณน้ำสะสมตามเวลา ตัวเลขทุกขั้นคำนวณใหม่เมื่อเปลี่ยนปริมาณกาแฟหรือเวลารวม</figcaption>
+</figure>
+<div class="callout note"><span class="callout-label">ใช้สูตรเป็นจุดเริ่มต้น</span><p>ผลจริงขึ้นกับเมล็ด เบอร์บด น้ำ และอุปกรณ์ เมื่อชงแล้วรสยังไม่ลงตัว ย้อนกลับไปใช้หลักในบทที่ 2 และหัวข้อ 4.4 เพื่อปรับทีละตัวแปร</p></div>
+
+<div data-summary="ch5"></div>
+<div class="quiz" data-quiz="ch5"></div>
+<nav class="pager" data-auto></nav>
+<footer class="colophon" data-auto></footer>
+</article>
+</div></main>
+<script src="assets/data.js"></script>
+<script src="assets/book.js"></script>
+<script src="assets/brew.js"></script>
+</body>
+</html>
