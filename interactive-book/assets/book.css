@@ -481,6 +481,23 @@ input[type=range]:focus-visible::-webkit-slider-thumb{ box-shadow: 0 0 0 4px var
 .param-hint{ margin: 0 !important; color: var(--ink-dim); font-size: 14.5px; }
 @media (max-width: 560px){ .pd-list{ grid-template-columns: 1fr; } .pd-list dd{ border-top: 0; padding-top: 0; } }
 
+/* 6.3b EY & TDS: formulas, calculator, mini control chart */
+.prose > .formula{ margin: 4px 0 22px; padding: 12px 18px; border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; background: var(--page); font: 500 16px/1.7 var(--sans); color: var(--ink); }
+.formula .f-name{ font-family: var(--mono); font-weight: 600; color: var(--accent); }
+.calc-steps{ margin: 4px 0 10px !important; padding-left: 1.4em; font-family: var(--sans); }
+.calc-steps li{ margin: 4px 0; }
+.calc-steps strong{ font-family: var(--mono); }
+.eyc{ font-family: var(--sans); }
+.eyc-inputs{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; margin-bottom: 14px; }
+.eyc-inputs .control{ display: block; border-top: 0; border-bottom: 1px dashed var(--line); }
+.eyc-inputs .dose-field{ width: 76px; }
+.eyc-out .metrics{ margin-top: 0; }
+.eyc-out .metric .v{ white-space: nowrap; }
+.eyc-verdict{ margin: 12px 0 8px !important; padding: 10px 14px; border-left: 3px solid var(--line); background: var(--paper-2); border-radius: 0 4px 4px 0; font-size: 14.5px; line-height: 1.7; }
+.eyc-out .calc-steps{ font-size: 14px; color: var(--ink-2); }
+@media (max-width: 560px){ .eyc-inputs{ grid-template-columns: 1fr; } .eyc-out .metric .v{ font-size: 18px; } }
+#mini-bcc{ display: block; width: 100%; height: auto; }
+
 /* 6.4 Method cards / generic 3-up cards */
 .cards3{ display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0; border-top: 2px solid var(--rule); border-bottom: 1px solid var(--line); }
 .cards3 > *{ padding: 16px 16px 18px; font: 400 14.5px/1.7 var(--sans); color: var(--ink-2); }
@@ -776,7 +793,7 @@ details.agi > summary{ display: flex; flex-direction: column; align-items: flex-
 
 :root[data-mode="visual"] .gist{ display: flex; }
 :root[data-mode="visual"] .visual-only{ display: block; }
-:root[data-mode="visual"] .prose > p:not(.dek):not(.gist):not(.cta),
+:root[data-mode="visual"] .prose > p:not(.dek):not(.gist):not(.cta):not(.formula),
 :root[data-mode="visual"] .prose > ul,
 :root[data-mode="visual"] .prose > ol:not(.flow),
 :root[data-mode="visual"] .prose > h3:not(.keep),

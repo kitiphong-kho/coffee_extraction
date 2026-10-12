@@ -1,4 +1,4 @@
-/* Small interactive figures: parameter tiles (บทที่ 1), filter table and
+/* Small interactive figures: parameter tiles, EY calculator and mini control chart (บทที่ 1), filter table and
    troubleshooting (บทที่ 4), water chemistry (บทที่ 6). Each one only runs
    when its markup is on the page. */
 (function(){
@@ -169,5 +169,80 @@
       });
     });
     renderWater('balanced');
+  }
+
+  /* ---------- 1.3 EY calculator + 1.4 mini brewing control chart ---------- */
+  var ABSORB = 2; // grounds hold about twice their weight of water after brewing
+  var EY_LO = 18, EY_HI = 22, TDS_LO = 1.15, TDS_HI = 1.35;
+  var eycDose = document.getElementById('eyc-dose');
+  var miniChart = document.getElementById('mini-bcc');
+  var MONO = 'IBM Plex Mono, monospace', SANS = 'IBM Plex Sans Thai Looped, sans-serif';
+  var MC = { W: 520, H: 300, l: 58, r: 18, t: 18, b: 52, ey0: 12, ey1: 28, tds0: 0.8, tds1: 1.8 };
+  function mcX(ey){ return MC.l + (Math.max(MC.ey0, Math.min(MC.ey1, ey)) - MC.ey0) / (MC.ey1 - MC.ey0) * (MC.W - MC.l - MC.r); }
+  function mcY(tds){ return MC.t + (1 - (Math.max(MC.tds0, Math.min(MC.tds1, tds)) - MC.tds0) / (MC.tds1 - MC.tds0)) * (MC.H - MC.t - MC.b); }
+  function drawMiniChart(){
+    if (!miniChart) return;
+    var o = '', x0 = mcX(EY_LO), x1 = mcX(EY_HI), y0 = mcY(TDS_HI), y1 = mcY(TDS_LO);
+    [12, 16, 20, 24, 28].forEach(function(e){
+      o += '<line x1="' + mcX(e) + '" x2="' + mcX(e) + '" y1="' + MC.t + '" y2="' + (MC.H - MC.b) + '" stroke="var(--line)"/>';
+      o += '<text x="' + mcX(e) + '" y="' + (MC.H - MC.b + 18) + '" text-anchor="middle" font-size="12" fill="var(--ink-dim)" font-family="' + MONO + '">' + e + '%</text>';
+    });
+    [0.8, 1.0, 1.2, 1.4, 1.6, 1.8].forEach(function(t){
+      o += '<line x1="' + MC.l + '" x2="' + (MC.W - MC.r) + '" y1="' + mcY(t) + '" y2="' + mcY(t) + '" stroke="var(--line)"/>';
+      o += '<text x="' + (MC.l - 8) + '" y="' + (mcY(t) + 4) + '" text-anchor="end" font-size="12" fill="var(--ink-dim)" font-family="' + MONO + '">' + t.toFixed(1) + '</text>';
+    });
+    o += '<rect x="' + x0 + '" y="' + y0 + '" width="' + (x1 - x0) + '" height="' + (y1 - y0) + '" fill="var(--gold)" fill-opacity=".18" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="5 3"/>';
+    o += '<text x="' + ((x0 + x1) / 2) + '" y="' + (y1 - 7) + '" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--gold)" font-family="' + SANS + '">ช่วงที่ SCA แนะนำ</text>';
+    o += '<text x="' + ((MC.l + x0) / 2) + '" y="' + (MC.t + 16) + '" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--sage)" font-family="' + SANS + '">สกัดน้อยไป</text>';
+    o += '<text x="' + ((x1 + MC.W - MC.r) / 2) + '" y="' + (MC.t + 16) + '" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--rust)" font-family="' + SANS + '">สกัดมากไป</text>';
+    o += '<path d="M' + MC.l + ' ' + MC.t + 'V' + (MC.H - MC.b) + 'H' + (MC.W - MC.r) + '" fill="none" stroke="var(--ink-dim)" stroke-width="1.5"/>';
+    o += '<text x="' + (MC.l + (MC.W - MC.l - MC.r) / 2) + '" y="' + (MC.H - 10) + '" text-anchor="middle" font-size="13" fill="var(--ink-dim)" font-family="' + SANS + '">Extraction Yield (%) — สกัดมากขึ้น →</text>';
+    o += '<text x="' + (-(MC.t + (MC.H - MC.t - MC.b) / 2)) + '" y="16" transform="rotate(-90)" text-anchor="middle" font-size="13" fill="var(--ink-dim)" font-family="' + SANS + '">TDS (%) — เข้มขึ้น →</text>';
+    o += '<g id="mini-pt"><circle r="8" fill="var(--accent)" stroke="var(--page)" stroke-width="2.5"/><text id="mini-pt-label" y="-14" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)" font-family="' + MONO + '"></text></g>';
+    miniChart.innerHTML = o;
+  }
+  // round half up (17.55 → 17.6) instead of toFixed's binary-float rounding
+  function fmt(n, d){ var p = Math.pow(10, d); return (Math.round(n * p + 1e-9) / p).toFixed(d); }
+  function eyZone(ey){ return ey < EY_LO ? 'under' : (ey > EY_HI ? 'over' : 'ideal'); }
+  function tdsZone(t){ return t < TDS_LO ? 'บาง' : (t > TDS_HI ? 'เข้ม' : 'เข้มพอดี'); }
+  function calcEY(){
+    var dose = Number(eycDose.value), water = Number(document.getElementById('eyc-water').value);
+    var tds = Number(document.getElementById('eyc-tds').value), bevIn = document.getElementById('eyc-bev').value;
+    var verdict = document.getElementById('eyc-verdict'), steps = document.getElementById('eyc-steps');
+    var measured = bevIn !== '' && Number(bevIn) > 0;
+    var bev = measured ? Number(bevIn) : water - ABSORB * dose;
+    var pt = document.getElementById('mini-pt');
+    if (!(dose > 0) || !(water > 0) || !(tds > 0) || !(bev > 0)){
+      ['eyc-bev-out', 'eyc-sol-out', 'eyc-ey-out'].forEach(function(id){ document.getElementById(id).textContent = '—'; });
+      verdict.textContent = 'กรอกปริมาณกาแฟ น้ำที่เท และ TDS ให้ครบ (น้ำที่เทต้องมากกว่า 2 เท่าของปริมาณกาแฟ)';
+      verdict.style.borderColor = 'var(--line)';
+      steps.innerHTML = '';
+      if (pt) pt.style.display = 'none';
+      return;
+    }
+    var sol = bev * tds / 100, ey = sol / dose * 100, z = eyZone(ey);
+    document.getElementById('eyc-bev-out').textContent = fmt(bev, 0) + ' g';
+    document.getElementById('eyc-sol-out').textContent = fmt(sol, 2) + ' g';
+    document.getElementById('eyc-ey-out').textContent = fmt(ey, 1) + '%';
+    var ZT = { under: ['สกัดน้อยไป', '--sage', 'อาจเปรี้ยวนำ จืด'], ideal: ['สกัดพอดี', '--gold', 'อยู่ในช่วงที่ SCA แนะนำ'], over: ['สกัดมากไป', '--rust', 'อาจขม ฝาด'] }[z];
+    verdict.innerHTML = '<strong></strong> · <span></span> · TDS ' + fmt(tds, 2) + '% (' + tdsZone(tds) + ')';
+    verdict.querySelector('strong').textContent = ZT[0] + ' (EY ' + fmt(ey, 1) + '%)';
+    verdict.querySelector('span').textContent = ZT[2];
+    verdict.style.borderColor = 'var(' + ZT[1] + ')';
+    steps.innerHTML =
+      '<li>น้ำกาแฟ ' + (measured ? '= ค่าที่ชั่งได้ = <strong>' + fmt(bev, 0) + ' g</strong>' : '≈ ' + water + ' − 2 × ' + dose + ' = <strong>' + fmt(bev, 0) + ' g</strong>') + '</li>' +
+      '<li>สารที่ละลาย = ' + fmt(bev, 0) + ' × ' + fmt(tds, 2) + ' ÷ 100 ≈ <strong>' + fmt(sol, 2) + ' g</strong></li>' +
+      '<li>EY = ' + fmt(sol, 2) + ' ÷ ' + dose + ' × 100 ≈ <strong>' + fmt(ey, 1) + '%</strong></li>';
+    if (pt){
+      pt.style.display = '';
+      pt.setAttribute('transform', 'translate(' + mcX(ey).toFixed(1) + ',' + mcY(tds).toFixed(1) + ')');
+      pt.querySelector('circle').setAttribute('fill', 'var(' + ZT[1] + ')');
+      document.getElementById('mini-pt-label').textContent = fmt(ey, 1) + '% · ' + fmt(tds, 2) + '%';
+    }
+  }
+  drawMiniChart();
+  if (eycDose){
+    ['eyc-dose', 'eyc-water', 'eyc-tds', 'eyc-bev'].forEach(function(id){ document.getElementById(id).addEventListener('input', calcEY); });
+    calcEY();
   }
 })();

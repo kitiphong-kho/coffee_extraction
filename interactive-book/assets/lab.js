@@ -21,21 +21,23 @@
   };
 
   var PRESETS = {
-    under:    { grind: 8, temp: 88, ratio: 17, time: 110, agitation: 2 },
-    balanced: { grind: 5, temp: 93, ratio: 16, time: 150, agitation: 5 },
-    over:     { grind: 2, temp: 96, ratio: 13, time: 220, agitation: 9 },
-    reset:    { grind: 5, temp: 93, ratio: 16, time: 150, agitation: 5 }
+    under:    { grind: 8, temp: 88, ratio: 18, time: 110, agitation: 2 },
+    balanced: { grind: 5, temp: 93, ratio: 17.5, time: 150, agitation: 5 },
+    over:     { grind: 2, temp: 96, ratio: 15, time: 220, agitation: 9 },
+    reset:    { grind: 5, temp: 93, ratio: 17.5, time: 150, agitation: 5 }
   };
 
   var EY_MIN = 14, EY_MAX = 26, CH_EY_MAX = 30, EY_LO = 18, EY_HI = 22;
   var TDS_MIN = 0.8, TDS_MAX = 1.7, CH_TDS_MAX = 2.0, TDS_LO = 1.15, TDS_HI = 1.35;
+  var ABSORB = 2; // grounds keep about twice their weight of water, so beverage ≈ water − 2 × dose (หัวข้อ 1.3)
 
   function readInputs(){
     return { grind: Number(els.grind.value), temp: Number(els.temp.value), ratio: Number(els.ratio.value), time: Number(els.time.value), agitation: Number(els.agitation.value) };
   }
   function applyValues(v){ Object.keys(els).forEach(function(k){ if (v[k] != null) els[k].value = v[k]; }); }
 
-  // Educational model: EY from grind, temperature, time and agitation; TDS = EY ÷ ratio
+  // Educational model: EY from grind, temperature, time and agitation;
+  // TDS = EY × dose ÷ beverage = EY ÷ (ratio − ABSORB)
   function compute(v){
     var grindFactor = (10 - v.grind) / 9;
     var tempFactor = (v.temp - 80) / 16;
@@ -43,7 +45,7 @@
     var agitationFactor = v.agitation / 10;
     var ey = 14 + 4 * grindFactor + 2 * tempFactor + 4 * timeFactor + 2 * agitationFactor;
     ey = Math.max(EY_MIN, Math.min(EY_MAX, ey));
-    return { ey: ey, tds: ey / v.ratio };
+    return { ey: ey, tds: ey / (v.ratio - ABSORB) };
   }
   function classify(ey, tds){
     return { eyCat: ey < EY_LO ? 'sour' : (ey > EY_HI ? 'bitter' : 'balanced'), tdsCat: tds < TDS_LO ? 'weak' : (tds > TDS_HI ? 'strong' : 'balanced') };
@@ -75,7 +77,7 @@
     chartSvg.setAttribute('viewBox', '0 0 ' + CW + ' ' + CH);
   }
   function xScale(ey){ return PAD.l + (ey - EY_MIN) / (CH_EY_MAX - EY_MIN) * plotW; }
-  function yScale(tds){ return PAD.t + (1 - (tds - TDS_MIN) / (CH_TDS_MAX - TDS_MIN)) * plotH; }
+  function yScale(tds){ tds = Math.max(TDS_MIN, Math.min(CH_TDS_MAX, tds)); return PAD.t + (1 - (tds - TDS_MIN) / (CH_TDS_MAX - TDS_MIN)) * plotH; }
   function text(parent, attrs, s){ var t = svgEl('text', attrs); t.textContent = s; parent.appendChild(t); return t; }
 
   function buildChartStatic(){
@@ -258,8 +260,8 @@
     if (v.temp >= 94) factorRow('อุณหภูมิน้ำ', 'ร้อนไป', 'rust', 'น้ำร้อนจัด (93–96°C ขึ้นไป) สกัดสารละลายเร็วมาก — เสี่ยงขมไหม้ รสฉุนจัด');
     else if (v.temp <= 87) factorRow('อุณหภูมิน้ำ', 'เย็นไป', 'sage', 'น้ำเย็น (85–90°C) สกัดช้าลง ดึงความหวานได้ไม่เต็มที่ — เสี่ยงเปรี้ยวฝาด ไม่หวาน ขาดมิติ');
     else factorRow('อุณหภูมิน้ำ', 'กำลังดี', 'gold', 'อยู่ในช่วงที่ดึงความหวานและบอดี้ได้ดีโดยไม่เสี่ยงไหม้');
-    if (v.ratio >= 17) factorRow('อัตราส่วน', 'น้ำมากไป', 'sage', 'น้ำเยอะ (เช่น 1:17 ขึ้นไป) Yield รวมสูงขึ้นแต่บอดี้บางลง — เสี่ยงรสเจือจาง ชืด และขมปลายค้าง');
-    else if (v.ratio <= 13) factorRow('อัตราส่วน', 'น้ำน้อยไป', 'rust', 'น้ำน้อย (เช่น 1:13 ลงมา) TDS สูง บอดี้หนา แต่สกัดองค์ประกอบรสไม่ครบ — เสี่ยงรสทึบ เปรี้ยวจัด ดื่มยาก');
+    if (v.ratio >= 19) factorRow('อัตราส่วน', 'น้ำมากไป', 'sage', 'น้ำเยอะ (เช่น 1:19 ขึ้นไป) Yield รวมสูงขึ้นแต่บอดี้บางลง — เสี่ยงรสเจือจาง ชืด และขมปลายค้าง');
+    else if (v.ratio <= 14) factorRow('อัตราส่วน', 'น้ำน้อยไป', 'rust', 'น้ำน้อย (เช่น 1:14 ลงมา) TDS สูง บอดี้หนา แต่สกัดองค์ประกอบรสไม่ครบ — เสี่ยงรสทึบ เปรี้ยวจัด ดื่มยาก');
     else factorRow('อัตราส่วน', 'กำลังดี', 'gold', 'อยู่ในช่วงที่สมดุลระหว่างความเข้มข้นและความครบรสของการสกัด');
     var intensity = (v.time - 90) / 150 + (v.agitation / 10);
     if (intensity >= 1.3) factorRow('เวลา/แรงกวน', 'มากไป', 'rust', 'เวลานาน คนหรือรินน้ำแรง สกัดเพิ่มขึ้นอย่างรวดเร็ว — เสี่ยงฝาดติดลิ้น รสหนักเกินไป');
@@ -289,7 +291,7 @@
     document.getElementById('rig-stream').setAttribute('stroke-width', (1.6 + v.agitation * 0.38).toFixed(2));
     var shown = Math.ceil(v.agitation / 3.4);
     document.querySelectorAll('#rig-swirl path').forEach(function(a, i){ a.style.opacity = i < shown ? (1 - i * 0.22) : 0; });
-    document.getElementById('rig-liquid').setAttribute('fill-opacity', (0.95 - (v.ratio - 12) / 6 * 0.6).toFixed(2));
+    document.getElementById('rig-liquid').setAttribute('fill-opacity', (0.95 - (v.ratio - 12) / 8 * 0.6).toFixed(2));
     document.getElementById('rig-ratio-txt').textContent = '1:' + v.ratio.toFixed(1);
     var tf = Math.min(v.time / 240, 0.999), ang = tf * 2 * Math.PI;
     var ex = 282 + 26 * Math.sin(ang), ey = 38 - 26 * Math.cos(ang);
@@ -333,10 +335,10 @@
   /* ---------- exercise: fix a flawed brew in five moves ---------- */
   var CH_LIMIT = 5;
   var CHALLENGES = [
-    { title: 'เปรี้ยวจัดและจืด', desc: 'ชิมแล้วเปรี้ยวแหลม รสบางเหมือนน้ำผลไม้เจือจาง', values: { grind: 8, temp: 88, ratio: 17, time: 110, agitation: 2 } },
+    { title: 'เปรี้ยวจัดและจืด', desc: 'ชิมแล้วเปรี้ยวแหลม รสบางเหมือนน้ำผลไม้เจือจาง', values: { grind: 8, temp: 88, ratio: 18, time: 110, agitation: 2 } },
     { title: 'เปรี้ยวแต่เข้มข้น', desc: 'เข้มและหนัก แต่รสเปรี้ยวฝาด ไม่มีความหวานมากลบ', values: { grind: 8, temp: 86, ratio: 12, time: 120, agitation: 2 } },
-    { title: 'ขมฝาดและเข้มจัด', desc: 'ขมไหม้ ฝาดแห้งคอ ดื่มแล้วหนักมาก', values: { grind: 2, temp: 96, ratio: 13, time: 220, agitation: 9 } },
-    { title: 'ขมนำ ทั้งที่ความเข้มข้นพอดี', desc: 'ความเข้มข้นกำลังดี แต่ท้ายแก้วขมและฝาดเด่นเกินไป', values: { grind: 3, temp: 95, ratio: 17.5, time: 200, agitation: 8 } }
+    { title: 'ขมฝาดและเข้มจัด', desc: 'ขมไหม้ ฝาดแห้งคอ ดื่มแล้วหนักมาก', values: { grind: 2, temp: 96, ratio: 15, time: 220, agitation: 9 } },
+    { title: 'ขมนำ ทั้งที่ความเข้มข้นพอดี', desc: 'ความเข้มข้นกำลังดี แต่ท้ายแก้วขมและฝาดเด่นเกินไป', values: { grind: 4, temp: 94, ratio: 19.5, time: 190, agitation: 7 } }
   ];
   var chActive = false, chIdx = -1, chMoves = 0, chStart = null;
   var chEl = {
