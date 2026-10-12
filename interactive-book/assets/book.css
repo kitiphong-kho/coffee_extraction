@@ -472,9 +472,9 @@ input[type=range]:focus-visible::-webkit-slider-thumb{ box-shadow: 0 0 0 4px var
 .param-tile.extra .num{ color: var(--accent); }
 .param-group{ margin: 14px 0 6px !important; font: 700 12px/1.4 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); }
 .param-group:first-child{ margin-top: 0 !important; }
-.param-tile.off{ grid-column: 1 / -1; border-style: dotted; background: var(--paper-2); opacity: .75; }
-.param-tile.off .pt-ico{ stroke: var(--ink-dim); }
-.param-tile.off[aria-expanded="true"]{ opacity: 1; }
+.param-extra-row{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+.param-extra-row .param-tile.extra{ grid-column: auto; }
+@media (max-width: 560px){ .param-extra-row{ grid-template-columns: 1fr; } }
 .param-detail{ margin-top: 12px; padding: 18px 20px; border-radius: 6px; background: var(--paper-2); min-height: 72px; font-family: var(--sans); }
 .param-detail h3{ margin: 0 0 10px !important; font: 700 19px/1.4 var(--serif) !important; }
 .pd-en{ font: 400 13px var(--sans); color: var(--ink-dim); margin-left: 10px; }
