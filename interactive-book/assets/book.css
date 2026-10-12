@@ -592,6 +592,25 @@ input[type=range]:focus-visible::-webkit-slider-thumb{ box-shadow: 0 0 0 4px var
 .ex-actions{ display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
 .ex-hint{ margin: 10px 0 0; padding: 10px 14px; border-left: 3px solid var(--gold); background: var(--page); font-size: 14px; line-height: 1.7; }
 .ex-result{ margin-top: 12px; }
+.exercise .ex-head .btn + .btn{ margin-left: -6px; }
+
+/* Guided experiments (2.4) */
+.experiments{ display: grid; grid-template-columns: 1fr; gap: 12px; margin: 18px 0 30px; }
+.exp{ display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border: 1px solid var(--line); border-top: 3px solid var(--accent); border-radius: 6px; background: var(--page); font: 400 14px/1.65 var(--sans); color: var(--ink-2); }
+.exp-head{ display: flex; flex-direction: column; gap: 2px; }
+.exp-label{ font: 700 11.5px/1.4 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.exp h3{ margin: 0 !important; font: 700 17px/1.45 var(--serif) !important; color: var(--ink); }
+.exp-goal{ margin: 0 !important; color: var(--ink-dim); }
+.exp .btn{ align-self: flex-start; }
+.exp-steps{ margin: 0 !important; padding-left: 1.3em !important; }
+.exp-steps li{ margin: 2px 0; }
+.exp-obs{ margin: 0 !important; padding: 8px 10px; background: var(--paper-2); border-radius: 4px; }
+.exp-obs b{ display: block; color: var(--ink); font-size: 12.5px; letter-spacing: .04em; }
+.exp-q{ border-top: 1px dashed var(--line); padding-top: 8px; }
+.exp-q summary{ cursor: pointer; font-weight: 600; color: var(--ink); }
+.exp-q[open] summary{ margin-bottom: 4px; }
+.exp-q p{ margin: 0 !important; }
+:root[data-mode="visual"] .exp-goal, :root[data-mode="visual"] .exp-q{ display: none; }
 
 /* 6.6 Recipe / timer */
 .equip-grid{ display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border-top: 2px solid var(--rule); }

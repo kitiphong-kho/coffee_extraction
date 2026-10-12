@@ -135,8 +135,8 @@
       tr.fix.forEach(function(f){ var li = document.createElement('li'); li.textContent = f; ul.appendChild(li); });
       [k1, p, k2, ul].forEach(function(n){ troubleResult.appendChild(n); });
       if (tr.challenge){
-        var a = document.createElement('a'); a.className = 'btn small'; a.href = 'ch2.html#s2-3';
-        a.textContent = 'ลองฝึกแก้รสชาติในหัวข้อ 2.3 →';
+        var a = document.createElement('a'); a.className = 'btn small'; a.href = 'ch2.html#s2-5';
+        a.textContent = 'ลองฝึกแก้รสชาติในหัวข้อ 2.5 →';
         troubleResult.appendChild(a);
       }
     });

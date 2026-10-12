@@ -24,33 +24,61 @@
 <article class="prose">
 <div data-obj="ch2"></div>
 
-<h2 id="s2-1"><span class="sec-no">2.1</span>ก่อนเริ่มทดลอง</h2>
-<p class="gist">ขวา = ขม · บน = เข้ม · ช่องกลาง = ดีที่สุด</p>
-<aside class="sidenote"><span class="sn-label">ที่มาของกรอบ</span>แบบจำลองนี้อ้างอิงความสัมพันธ์เชิงแนวคิดตาม Brewing Control Chart ของ SCA: ค่าสกัดที่แนะนำอยู่ระหว่าง 18–22% และ TDS ที่แนะนำอยู่ระหว่าง 1.15–1.35% ตัวเลขที่คำนวณได้เป็นค่าประมาณเพื่อการเรียนรู้ ไม่ใช่ผลวัดจากเครื่อง <a class="term" data-term="refractometer" href="appendix.html#g-refractometer">refractometer</a> จริง</aside>
-<p>ห้องปฏิบัติการในบทนี้จำลองการชงแบบดริปด้วยตัวแปรห้าตัว ได้แก่ ขนาดบด อุณหภูมิน้ำ อัตราส่วนกาแฟต่อน้ำ เวลาสกัด และการกวน แล้ววางผลลงบน<a class="term" data-term="bcc" href="appendix.html#g-bcc">แผนภูมิควบคุมการชง</a>ของ SCA<sup class="cite"><a href="appendix.html#ref-3" data-ref="3">3</a></sup> แกนนอนคือ <a class="term" data-term="ey" href="appendix.html#g-ey">EY</a> (ไปทางขวา = สกัดมากขึ้น เสี่ยงขม) แกนตั้งคือ <a class="term" data-term="tds" href="appendix.html#g-tds">TDS</a> (ขึ้นบน = เข้มขึ้น)</p>
+<h2 id="s2-1"><span class="sec-no">2.1</span>แบบจำลองนี้ทำงานอย่างไร</h2>
+<p class="dek">รู้ก่อนว่าแถบเลื่อนแต่ละตัวทำอะไร จะอ่านผลการทดลองได้ถูก</p>
+<p class="gist">บด · เวลา · อุณหภูมิ · การกวน → EY &nbsp;|&nbsp; อัตราส่วน → TDS</p>
+<p>ห้องปฏิบัติการในบทนี้จำลองการชงแบบดริปด้วยตัวแปรห้าตัว แบ่งหน้าที่เป็นสองกลุ่ม: ขนาดบด เวลาสกัด อุณหภูมิน้ำ และการกวน กำหนดว่าผงกาแฟละลายออกมามากแค่ไหน (<a class="term" data-term="ey" href="appendix.html#g-ey">EY</a>) ส่วนอัตราส่วนกาแฟต่อน้ำไม่เปลี่ยน EY แต่กำหนดว่าสารที่ละลายออกมาจะเจือจางในน้ำกาแฟมากน้อยเท่าไร (<a class="term" data-term="tds" href="appendix.html#g-tds">TDS</a>) ตามสูตรในหัวข้อ 1.3</p>
+<p class="formula"><span class="f-name">TDS (%)</span> = EY (%) ÷ (อัตราส่วน − 2)</p>
+<p>เลข 2 ในสูตรคือน้ำที่ผงกาแฟอมไว้ราว 2 เท่าของน้ำหนักตัวเอง ตารางที่ 2.1 สรุปว่าแต่ละตัวแปรขยับ EY ได้มากแค่ไหนในแบบจำลองนี้ เมื่อเลื่อนจากสุดทางหนึ่งไปอีกทางหนึ่ง</p>
+<div class="tbl-wrap">
+  <p class="tbl-cap"><span class="fig-label">ตารางที่ 2.1</span>น้ำหนักของตัวแปรในแบบจำลอง (EY เริ่มที่ 14% เมื่อทุกตัวอยู่ฝั่งสกัดน้อยสุด และถูกจำกัดไม่เกิน 26%)</p>
+  <table class="tbl">
+    <thead><tr><th>ตัวแปร</th><th>ช่วงของแถบเลื่อน</th><th>ทิศทาง</th><th>EY ขยับได้</th></tr></thead>
+    <tbody>
+      <tr><td>ขนาดบด</td><td>1 (ละเอียดมาก) – 10 (หยาบมาก)</td><td>บดละเอียดขึ้น → EY สูงขึ้น</td><td class="num">4%</td></tr>
+      <tr><td>เวลาสกัด</td><td class="num">1:30 – 4:00</td><td>นานขึ้น → EY สูงขึ้น</td><td class="num">4%</td></tr>
+      <tr><td>อุณหภูมิน้ำ</td><td class="num">80 – 96°C</td><td>ร้อนขึ้น → EY สูงขึ้น</td><td class="num">2%</td></tr>
+      <tr><td>การกวน/รินน้ำ</td><td>0 (เบา) – 10 (แรง)</td><td>แรงขึ้น → EY สูงขึ้น</td><td class="num">2%</td></tr>
+      <tr><td>อัตราส่วน</td><td class="num">1:12 – 1:20</td><td>ไม่เปลี่ยน EY · น้ำมากขึ้น → TDS ต่ำลง</td><td class="num">0%</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>ตารางนี้บอกว่าถ้าต้องการขยับ EY มาก ๆ ขนาดบดและเวลาเป็นคันโยกที่แรงที่สุด ส่วนอุณหภูมิและการกวนเหมาะกับการปรับละเอียด</p>
 <div class="callout warn">
   <span class="callout-label">อ่านก่อนทดลอง — แบบจำลองเพื่อการเรียนรู้</span>
   <p><strong>เวลาในการชงจริงเป็นผลลัพธ์ ไม่ใช่ตัวที่ตั้งได้เอง:</strong> ปรับเบอร์บดให้ละเอียดขึ้น น้ำจะไหลช้าลงและเวลาก็ยาวตาม ในห้องปฏิบัติการนี้แยกเวลาออกมาให้ปรับเองเพื่อดูผลของมันทีละตัว</p>
-  <p><strong>ตัวเลขเป็นค่าประมาณ ไม่ใช่ค่าวัดจริง:</strong> EY คำนวณจากสูตรอย่างง่ายและถูกจำกัดในช่วง 14–26% ส่วน TDS คิดจาก EY และน้ำกาแฟที่ได้จริง โดยหักน้ำที่ผงกาแฟอมไว้ราว 2 เท่าของน้ำหนักกาแฟ (สูตรเดียวกับ<a href="ch1.html#s1-3">หัวข้อ 1.3</a>) ใช้ดูทิศทางว่าตัวแปรไหนทำให้ผลขยับไปทางใด ไม่ควรใช้ทำนายค่าที่ได้จากการชงจริง</p>
+  <p><strong>ตัวเลขเป็นค่าประมาณ ไม่ใช่ค่าวัดจริง:</strong> EY คำนวณจากสูตรอย่างง่ายในตารางที่ 2.1 และถูกจำกัดในช่วง 14–26% ส่วน TDS คิดจาก EY และน้ำกาแฟที่ได้จริง โดยหักน้ำที่ผงกาแฟอมไว้ราว 2 เท่าของน้ำหนักกาแฟ (สูตรเดียวกับ<a href="ch1.html#s1-3">หัวข้อ 1.3</a>) ใช้ดูทิศทางว่าตัวแปรไหนทำให้ผลขยับไปทางใด ไม่ควรใช้ทำนายค่าที่ได้จากการชงจริง</p>
 </div>
+
+<h2 id="s2-2"><span class="sec-no">2.2</span>อ่านผลบนแผนภูมิควบคุมการชง</h2>
+<p class="dek">แผนภูมิเดียวที่บอกทั้งรสและความเข้มของแก้ว</p>
+<p class="gist">ขวา = ขม · บน = เข้ม · ช่องกลาง = ดีที่สุด</p>
+<aside class="sidenote"><span class="sn-label">ที่มาของกรอบ</span>แบบจำลองนี้อ้างอิงความสัมพันธ์เชิงแนวคิดตาม Brewing Control Chart ของ SCA: ค่าสกัดที่แนะนำอยู่ระหว่าง 18–22% และ TDS ที่แนะนำอยู่ระหว่าง 1.15–1.35% ตัวเลขที่คำนวณได้เป็นค่าประมาณเพื่อการเรียนรู้ ไม่ใช่ผลวัดจากเครื่อง <a class="term" data-term="refractometer" href="appendix.html#g-refractometer">refractometer</a> จริง</aside>
+<p><a class="term" data-term="bcc" href="appendix.html#g-bcc">แผนภูมิควบคุมการชง</a> (Brewing Control Chart) ของ SCA<sup class="cite"><a href="appendix.html#ref-3" data-ref="3">3</a></sup> วาง EY บนแกนนอนและ TDS บนแกนตั้ง ไปทางขวาคือสกัดมากขึ้น (จากเปรี้ยวไปทางขม) ขึ้นบนคือเข้มขึ้น เส้นแบ่งที่ EY 18% และ 22% กับ TDS 1.15% และ 1.35% (ช่วงที่แนะนำในหัวข้อ 1.4) ตัดแผนภูมิเป็นเก้าช่อง ช่องกลางคือแก้วที่ทั้งสกัดพอดีและเข้มพอดี</p>
 <figure class="fig read-map">
   <div class="fig-body"><svg viewBox="0 0 520 250" role="img" aria-label="แผนผังเก้าช่องสำหรับอ่านแผนภูมิควบคุมการชง: แกนนอน EY แบ่งเป็นเปรี้ยว สมดุล ขม แกนตั้ง TDS แบ่งเป็นบาง พอดี เข้ม ช่องกลางคือจุดทองคำ"><rect x="70" y="20" width="140" height="180" fill="var(--sage)" fill-opacity=".10"/><text x="140.0" y="55.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--sage)" font-family="IBM Plex Sans Thai Looped, sans-serif">เข้ม + เปรี้ยวฝาด</text><text x="140.0" y="115.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--sage)" font-family="IBM Plex Sans Thai Looped, sans-serif">พอดี + เปรี้ยวนำ</text><text x="140.0" y="175.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--sage)" font-family="IBM Plex Sans Thai Looped, sans-serif">บาง + เปรี้ยวนำ</text><rect x="210" y="20" width="140" height="180" fill="var(--gold)" fill-opacity=".10"/><text x="280.0" y="55.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--gold)" font-family="IBM Plex Sans Thai Looped, sans-serif">เข้ม + สมดุล</text><rect x="210" y="80" width="140" height="60" fill="var(--gold)" fill-opacity=".28" stroke="var(--gold)" stroke-width="2" stroke-dasharray="5 3"/><text x="280.0" y="115.0" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)" font-family="IBM Plex Sans Thai Looped, sans-serif">จุดทองคำ</text><text x="280.0" y="175.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--gold)" font-family="IBM Plex Sans Thai Looped, sans-serif">บาง + สมดุล</text><rect x="350" y="20" width="140" height="180" fill="var(--rust)" fill-opacity=".10"/><text x="420.0" y="55.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--rust)" font-family="IBM Plex Sans Thai Looped, sans-serif">เข้ม + ขมจัด</text><text x="420.0" y="115.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--rust)" font-family="IBM Plex Sans Thai Looped, sans-serif">พอดี + ขมนำ</text><text x="420.0" y="175.0" text-anchor="middle" font-size="13" font-weight="500" fill="var(--rust)" font-family="IBM Plex Sans Thai Looped, sans-serif">บาง + ขมปลายลิ้น</text><g stroke="var(--line)" stroke-width="1" stroke-dasharray="3 3"><line x1="210" y1="20" x2="210" y2="200"/><line x1="350" y1="20" x2="350" y2="200"/><line x1="70" y1="80" x2="490" y2="80"/><line x1="70" y1="140" x2="490" y2="140"/></g><path d="M70 14V200H496" fill="none" stroke="var(--ink-dim)" stroke-width="1.5"/><path d="M496 196l8 4-8 4zM66 14l4-8 4 8z" fill="var(--ink-dim)"/><g font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Mono, monospace" text-anchor="middle"><text x="210" y="216">18%</text><text x="350" y="216">22%</text></g><g font-size="11" fill="var(--ink-dim)" font-family="IBM Plex Mono, monospace" text-anchor="end"><text x="64" y="84">1.35%</text><text x="64" y="144">1.15%</text></g><text x="280" y="240" text-anchor="middle" font-size="12.5" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">Extraction Yield — สกัดมากขึ้น (เปรี้ยว → ขม) →</text><text x="-110" y="18" transform="rotate(-90)" text-anchor="middle" font-size="12.5" fill="var(--ink-dim)" font-family="IBM Plex Sans Thai Looped, sans-serif">TDS — เข้มขึ้น →</text></svg></div>
   <figcaption><span class="fig-label">รูปที่ 2.1</span>วิธีอ่านแผนภูมิควบคุมการชง: ตำแหน่งของจุดบอกทั้งระดับการสกัด (ซ้าย–ขวา) และความเข้มข้น (ล่าง–บน) ป้ายในแต่ละช่องตรงกับผลที่ห้องปฏิบัติการจะแสดง</figcaption>
 </figure>
+<p>นอกจากแผนภูมิ ห้องปฏิบัติการยังแสดงผลอีกสามแบบ:</p>
+<ul>
+  <li><strong>ถ้วยจำลอง</strong> — สีในถ้วยแสดงสัดส่วนของกรด หวาน/บอดี้ และขม/ฝาด ที่ละลายออกมา ความสูงของน้ำในถ้วยตามความเข้ม (TDS)</li>
+  <li><strong>ผลกระทบของแต่ละตัวแปร</strong> — ป้ายสีบอกว่าตัวแปรแต่ละตัวกำลังดึงรสไปทางใด สีเขียวคือเสี่ยงสกัดน้อย สีแดงคือเสี่ยงสกัดมาก สีทองคือกำลังดี</li>
+  <li><strong>ลำดับการสกัด</strong> — แถบเดียวกับรูปที่ 1.2 แสดงว่าตอนนี้การสกัดไปถึงกลุ่มสารใด</li>
+</ul>
 
-<h2 id="s2-2"><span class="sec-no">2.2</span>ทดลองปรับตัวแปร</h2>
-<p class="dek">เริ่มจากสูตรตัวอย่าง แล้วปรับทีละตัว สังเกตจุดบนกราฟ ถ้วยจำลอง และคำอธิบายผลที่เปลี่ยนตาม</p>
+<h2 id="s2-3"><span class="sec-no">2.3</span>ห้องปฏิบัติการ</h2>
+<p class="dek">เริ่มจากสูตรตัวอย่าง แล้วลองปรับอย่างอิสระ สังเกตจุดบนแผนภูมิ ถ้วยจำลอง และคำอธิบายผลที่เปลี่ยนตาม</p>
 <p class="gist">ลากตัวเลื่อน ดูจุดเคลื่อน</p>
-
 <figure class="fig wide" id="lab-fig">
   <div class="lab" id="lab">
-    <div class="exercise" id="exercise">
+    <div class="exercise" id="exercise" hidden>
       <div class="ex-head">
         <span class="ex-label">แบบฝึกหัด 2.1</span>
         <span class="ex-title">ฝึกแก้รสชาติ (Dial-in Challenge)</span>
-        <button class="btn primary small" id="ch-start" type="button">เริ่มโจทย์</button>
+        <button class="btn primary small" id="ch-start" type="button">สลับโจทย์</button>
+        <button class="btn small" id="ch-close" type="button">ปิดโจทย์</button>
       </div>
-      <p class="ex-intro" id="ch-intro">ระบบจะให้แก้วที่มีปัญหามาหนึ่งแก้ว ปรับแถบเลื่อนด้านล่างให้ EY อยู่ที่ 18–22% และ TDS 1.15–1.35% ภายใน 5 ครั้ง (ดูคำอธิบายในหัวข้อ 2.3)</p>
+      <p class="ex-intro" id="ch-intro" hidden>ปรับแถบเลื่อนด้านล่างให้ EY อยู่ที่ 18–22% และ TDS 1.15–1.35% ภายใน 5 ครั้ง (ดูวิธีคิดในหัวข้อ 2.5)</p>
       <div id="ch-active" hidden>
         <p class="ex-problem"><strong id="ch-title"></strong><span id="ch-desc"></span></p>
         <div class="ex-meta">
@@ -187,20 +215,14 @@
           </div>
         </div>
 
-        <div class="lab-block seq-box">
-          <h3 class="lab-h">ข · ลำดับการสกัดตามขนาดโมเลกุล<span class="sub">น้ำไม่ได้ดึงทุกรสชาติออกมาพร้อมกัน — โมเลกุลเล็กละลายก่อน โมเลกุลใหญ่ละลายทีหลัง (เทียบรูปที่ 1.2)</span></h3>
-          <svg viewBox="0 0 460 132" id="sequence" role="img" aria-label="แผนภาพลำดับการสกัดสารตามขนาดโมเลกุล"></svg>
-          <p class="seq-caption" id="sequence-caption"></p>
-        </div>
-
         <div class="lab-block">
-          <h3 class="lab-h">ค · ผลกระทบของแต่ละตัวแปรตอนนี้<span class="sub">ทิศทางที่แต่ละตัวแปรกำลังดึงรสชาติไป ตามหลักการสกัดกาแฟ</span></h3>
+          <h3 class="lab-h">ข · ผลกระทบของแต่ละตัวแปรตอนนี้<span class="sub">ทิศทางที่แต่ละตัวแปรกำลังดึงรสชาติไป ตามหลักการสกัดกาแฟ</span></h3>
           <ul class="factor-list" id="factor-list"></ul>
         </div>
 
         <div class="lab-block trail" aria-label="เส้นทางการชงหลายรอบ">
           <div class="trail-head">
-            <h3 class="lab-h" style="margin:0">ง · เส้นทางการชงหลายรอบ</h3>
+            <h3 class="lab-h" style="margin:0">ค · เส้นทางการชงหลายรอบ</h3>
             <div class="ex-actions" style="margin:0">
               <button class="btn small" id="trail-save" type="button">+ บันทึกรอบนี้</button>
               <button class="btn small" id="trail-clear" type="button">ล้างเส้นทาง</button>
@@ -214,23 +236,59 @@
             </table>
           </div>
         </div>
+        <div class="lab-block seq-box">
+          <h3 class="lab-h">ง · ลำดับการสกัดตามขนาดโมเลกุล (ส่วนเสริม)<span class="sub">น้ำไม่ได้ดึงทุกรสชาติออกมาพร้อมกัน — โมเลกุลเล็กละลายก่อน โมเลกุลใหญ่ละลายทีหลัง (เทียบรูปที่ 1.2)</span></h3>
+          <svg viewBox="0 0 460 132" id="sequence" role="img" aria-label="แผนภาพลำดับการสกัดสารตามขนาดโมเลกุล"></svg>
+          <p class="seq-caption" id="sequence-caption"></p>
+        </div>
       </div>
     </div>
   </div>
-  <figcaption><span class="badge-live">โต้ตอบได้</span><span class="fig-label">รูปที่ 2.2</span>ห้องปฏิบัติการจำลองการชงแบบดริป ภาพประกอบด้านซ้ายเปลี่ยนตามแถบเลื่อน ค่าทางขวาคำนวณจากแบบจำลองอย่างง่ายเพื่อดูทิศทางของผล</figcaption>
+  <figcaption><span class="badge-live">โต้ตอบได้</span><span class="fig-label">รูปที่ 2.2</span>ห้องปฏิบัติการจำลองการชงแบบดริป ภาพประกอบด้านซ้ายเปลี่ยนตามแถบเลื่อน ผลทางขวาคำนวณจากแบบจำลองในตารางที่ 2.1 เพื่อดูทิศทางของผล</figcaption>
 </figure>
 
-<h2 id="s2-3"><span class="sec-no">2.3</span>แบบฝึกหัด: ฝึกแก้รสชาติ</h2>
+<h2 id="s2-4"><span class="sec-no">2.4</span>การทดลองแบบมีขั้นตอน</h2>
+<p class="dek">ปรับทีละตัวแปรแล้วบันทึกทุกรอบ จะเห็นชัดว่าตัวแปรไหนพาจุดไปทางใด</p>
+<p class="gist">ปรับทีละตัว · บันทึกทุกรอบ</p>
+<p>การทดลองแต่ละชุดเริ่มจากสูตรจุดสมดุล (บด 5 · 93°C · 1:17.5 · 2:30 · การกวน 5) ปุ่ม "ตั้งค่าเริ่มต้น" จะล้างเส้นทางเดิม บันทึกรอบที่ 1 ให้ แล้วพาขึ้นไปที่ห้องปฏิบัติการ จากนั้นทำตามขั้นตอน และกด "+ บันทึกรอบนี้" ในส่วน ค ทุกครั้งที่เปลี่ยนค่า</p>
+<div class="experiments">
+  <div class="exp">
+    <div class="exp-head"><span class="exp-label">การทดลอง ก</span><h3 class="keep">เปลี่ยนแค่ขนาดบด</h3></div>
+    <p class="exp-goal">ดูว่าการบดอย่างเดียวพาจุดไปทางไหน</p>
+    <button class="btn small" type="button" data-exp="a">ตั้งค่าเริ่มต้นการทดลองนี้ ↑</button>
+    <ol class="exp-steps"><li>ปรับขนาดบดเป็น <b>3</b> แล้วบันทึกรอบ</li><li>ปรับขนาดบดเป็น <b>7</b> แล้วบันทึกรอบ</li></ol>
+    <p class="exp-obs"><b>สิ่งที่ควรสังเกต</b> จุดเลื่อนเฉียง ไม่ได้เลื่อนแนวนอนอย่างเดียว บดละเอียดขึ้นพาจุดไปทางขวาและขึ้นบนพร้อมกัน (EY ราว 21.3% · TDS ราว 1.38%) บดหยาบลงพาจุดไปทางซ้ายและลงล่าง</p>
+    <details class="exp-q"><summary>คำถามชวนคิด: ทำไม TDS เปลี่ยนด้วย ทั้งที่ไม่ได้แตะอัตราส่วน?</summary><p>เพราะ TDS = EY ÷ (อัตราส่วน − 2) เมื่อผงกาแฟละลายออกมามากขึ้น สารในแก้วก็มากขึ้น แก้วจึงเข้มขึ้นตามไปด้วย การปรับตัวแปรฝั่ง EY จึงพาจุดไปตามแนวเฉียงเสมอ</p></details>
+  </div>
+  <div class="exp">
+    <div class="exp-head"><span class="exp-label">การทดลอง ข</span><h3 class="keep">เปลี่ยนแค่อัตราส่วน</h3></div>
+    <p class="exp-goal">ดูว่าน้ำมากหรือน้อยลงเปลี่ยนอะไรบ้าง</p>
+    <button class="btn small" type="button" data-exp="b">ตั้งค่าเริ่มต้นการทดลองนี้ ↑</button>
+    <ol class="exp-steps"><li>ปรับอัตราส่วนเป็น <b>1:15.5</b> แล้วบันทึกรอบ</li><li>ปรับอัตราส่วนเป็น <b>1:19.5</b> แล้วบันทึกรอบ</li></ol>
+    <p class="exp-obs"><b>สิ่งที่ควรสังเกต</b> จุดเลื่อนขึ้นลงในแนวตั้งเท่านั้น EY คงเดิม ส่วน TDS เปลี่ยนจากราว 1.51% (น้ำน้อย) เป็นราว 1.17% (น้ำมาก)</p>
+    <details class="exp-q"><summary>คำถามชวนคิด: ถ้าแก้วออกมาเปรี้ยวและบาง การเติมกาแฟเพิ่ม (ลดอัตราส่วน) จะแก้ได้ครบไหม?</summary><p>ไม่ครบ ลดอัตราส่วนแก้ความบางได้ แต่ไม่เปลี่ยน EY รสเปรี้ยวจากการสกัดน้อยจึงยังอยู่ ต้องใช้ตัวแปรฝั่ง EY เช่น บดละเอียดขึ้น ร่วมด้วย</p></details>
+  </div>
+  <div class="exp">
+    <div class="exp-head"><span class="exp-label">การทดลอง ค</span><h3 class="keep">ชดเชยกันระหว่างบดกับเวลา</h3></div>
+    <p class="exp-goal">ดูว่าตัวแปรสองตัวหักล้างกันได้</p>
+    <button class="btn small" type="button" data-exp="c">ตั้งค่าเริ่มต้นการทดลองนี้ ↑</button>
+    <ol class="exp-steps"><li>ปรับขนาดบดเป็น <b>3</b> แล้วบันทึกรอบ (จุดเลื่อนขึ้นขวา)</li><li>ลดเวลาสกัดเป็น <b>1:55</b> แล้วบันทึกรอบ</li></ol>
+    <p class="exp-obs"><b>สิ่งที่ควรสังเกต</b> รอบที่ 3 กลับมาเกือบทับรอบที่ 1 (EY ราว 20.4% · TDS ราว 1.32%) แม้สูตรจะต่างกัน</p>
+    <details class="exp-q"><summary>คำถามชวนคิด: ในการชงจริง ทำแบบนี้ได้ง่ายไหม?</summary><p>ไม่ง่าย เพราะในการชงจริง เวลาเป็นผลลัพธ์ บดละเอียดขึ้นทำให้น้ำไหลช้าลงและเวลายาวขึ้นเอง (ดูกรอบ "อ่านก่อนทดลอง" ในหัวข้อ 2.1) จะลดเวลาได้ต้องเปลี่ยนวิธีเท เช่น เทน้ำน้อยรอบลง</p></details>
+  </div>
+</div>
+
+<h2 id="s2-5"><span class="sec-no">2.5</span>แบบฝึกหัด: ฝึกแก้รสชาติ</h2>
 <p class="dek">วินิจฉัยแก้วที่มีปัญหา แล้วปรับให้เข้ากรอบสมดุลภายใน 5 ครั้ง</p>
 <p class="gist">แก้ EY ก่อน แล้วคุม TDS</p>
-<p>แบบฝึกหัด 2.1 จะสุ่มแก้วที่มีปัญหามาหนึ่งแก้ว พร้อมอาการที่ชิมได้ ผู้อ่านต้องปรับตัวแปรในรูปที่ 2.2 จนจุดเข้ากรอบที่ SCA แนะนำ คือ EY 18–22% และ TDS 1.15–1.35% การปล่อยแถบเลื่อนแต่ละครั้งนับเป็นหนึ่งครั้ง ครบ 5 ครั้งแล้วยังไม่เข้ากรอบจะเฉลยแนวทางให้</p>
+<p>แบบฝึกหัด 2.1 จะสุ่มแก้วที่มีปัญหามาหนึ่งแก้ว พร้อมอาการที่ชิมได้ ผู้อ่านต้องปรับตัวแปรในห้องปฏิบัติการ (รูปที่ 2.2) จนจุดเข้ากรอบที่ SCA แนะนำ คือ EY 18–22% และ TDS 1.15–1.35% การปล่อยแถบเลื่อนแต่ละครั้งนับเป็นหนึ่งครั้ง ครบ 5 ครั้งแล้วยังไม่เข้ากรอบจะเฉลยแนวทางให้</p>
 <p>ลำดับการคิดที่ช่วยได้:</p>
 <ol class="flow">
   <li><strong>อ่านอาการ</strong> — เปรี้ยว จืด ติดคอสั้น คือสกัดน้อยไป ขม ฝาด แห้งคอ คือสกัดมากไป (ตารางที่ 1.1)</li>
-  <li><strong>แก้ EY ก่อน</strong> — ใช้ขนาดบด อุณหภูมิ เวลา หรือการกวน ดันจุดไปทางซ้ายหรือขวาให้อยู่ระหว่าง 18–22%</li>
+  <li><strong>แก้ EY ก่อน</strong> — ใช้ขนาดบด อุณหภูมิ เวลา หรือการกวน (ตารางที่ 2.1) ดันจุดไปทางซ้ายหรือขวาให้อยู่ระหว่าง 18–22%</li>
   <li><strong>แล้วคุม TDS</strong> — เมื่อ EY เข้าช่วงแล้ว ใช้อัตราส่วนน้ำเลื่อนจุดขึ้นหรือลงให้เข้ากรอบ</li>
 </ol>
-<p class="cta"><button class="btn primary" type="button" data-start-exercise>เริ่มโจทย์ในรูปที่ 2.2 ↑</button></p>
+<p class="cta"><button class="btn primary" type="button" data-start-exercise>เริ่มโจทย์ในห้องปฏิบัติการ ↑</button></p>
 <div class="callout note"><span class="callout-label">หมายเหตุ</span><p>เป็นแบบฝึกหัดจากแบบจำลองเพื่อการเรียนรู้ ไม่ใช่ผลวัดจริง เมื่อชงจริงแล้วเจออาการเหล่านี้ ดูสาเหตุทางกายภาพและวิธีแก้ได้ในหัวข้อ <a href="ch4.html#s4-4">4.4 วินิจฉัยอาการหน้าแก้ว</a></p></div>
 
 <div data-summary="ch2"></div>

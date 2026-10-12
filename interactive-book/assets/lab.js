@@ -327,7 +327,7 @@
     btn.addEventListener('click', function(){
       var p = PRESETS[btn.getAttribute('data-preset')];
       if (!p) return;
-      if (chActive){ chEnd(); chEl.result.hidden = true; chEl.intro.hidden = false; chEl.start.textContent = 'เริ่มโจทย์'; }
+      chClose();
       applyValues(p); render();
     });
   });
@@ -342,6 +342,7 @@
   ];
   var chActive = false, chIdx = -1, chMoves = 0, chStart = null;
   var chEl = {
+    box: document.getElementById('exercise'), close: document.getElementById('ch-close'),
     start: document.getElementById('ch-start'), intro: document.getElementById('ch-intro'), active: document.getElementById('ch-active'),
     title: document.getElementById('ch-title'), desc: document.getElementById('ch-desc'), moves: document.getElementById('ch-moves'),
     hint: document.getElementById('ch-hint'), giveup: document.getElementById('ch-giveup'), hintText: document.getElementById('ch-hint-text'),
@@ -367,6 +368,12 @@
     chEl.tag.style.background = 'var(' + (kind === 'won' ? '--gold' : '--rust') + ')';
     chEl.rTitle.textContent = title;
     chEl.rBody.textContent = body;
+  }
+  // hide the exercise bar (it only shows while an exercise is running or its result is on screen)
+  function chClose(){
+    if (chActive) chEnd();
+    chEl.result.hidden = true;
+    chEl.box.hidden = true;
   }
   function chEnd(){
     chActive = false;
@@ -402,6 +409,7 @@
     applyValues(c.values); render();
     chEl.title.textContent = c.title;
     chEl.desc.textContent = c.desc;
+    chEl.box.hidden = false;
     chEl.intro.hidden = true; chEl.result.hidden = true; chEl.hintText.hidden = true; chEl.active.hidden = false;
     chEl.start.textContent = 'สลับโจทย์';
     chRenderMoves();
@@ -420,11 +428,24 @@
     });
   });
   chEl.start.addEventListener('click', chStartNew);
+  chEl.close.addEventListener('click', chClose);
   chEl.hint.addEventListener('click', function(){ chEl.hintText.hidden = false; chEl.hintText.textContent = chHintFor(readInputs()); });
   chEl.giveup.addEventListener('click', function(){ var hint = chHintFor(readInputs()); chEnd(); chShowResult('gaveup', 'ลองดูแนวทางนี้', hint); });
   document.querySelectorAll('[data-start-exercise]').forEach(function(b){
     b.addEventListener('click', function(){
       chStartNew();
+      document.getElementById('lab').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* ---------- 2.4 guided experiments: every set starts from the balanced recipe ---------- */
+  var EXP_START = { grind: 5, temp: 93, ratio: 17.5, time: 150, agitation: 5 };
+  document.querySelectorAll('[data-exp]').forEach(function(b){
+    b.addEventListener('click', function(){
+      chClose();
+      applyValues(EXP_START); render();
+      trail = [];
+      document.getElementById('trail-save').click(); // round 1 = starting point
       document.getElementById('lab').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
