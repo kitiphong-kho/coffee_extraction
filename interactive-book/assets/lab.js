@@ -310,6 +310,10 @@
     document.getElementById('m-ey').textContent = r.ey.toFixed(1) + '%';
     document.getElementById('m-tds').textContent = r.tds.toFixed(2) + '%';
     document.getElementById('m-zone').textContent = ZONE_LABEL[cls.eyCat] + ' · ' + (cls.tdsCat === 'weak' ? 'บาง' : cls.tdsCat === 'strong' ? 'เข้ม' : 'พอดี');
+    document.getElementById('mini-ey').textContent = r.ey.toFixed(1) + '%';
+    document.getElementById('mini-tds').textContent = r.tds.toFixed(2) + '%';
+    var miniTag = document.getElementById('mini-tag');
+    miniTag.textContent = verdict.tag; miniTag.style.background = 'var(' + colorVar[verdict.color] + ')';
     var tag = document.getElementById('verdict-tag');
     tag.textContent = verdict.tag; tag.style.background = 'var(' + colorVar[verdict.color] + ')';
     document.getElementById('verdict-title').textContent = verdict.title;
@@ -450,6 +454,16 @@
     });
   });
 
+  /* ---------- result strip: hide it while the chart itself is on screen ---------- */
+  var strip = document.getElementById('lab-mini'), chartBox = document.querySelector('.chart-box');
+  function syncStrip(){
+    var r = chartBox.getBoundingClientRect(), vh = window.innerHeight;
+    var shown = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    strip.classList.toggle('off', r.height > 0 && shown > r.height * 0.4);
+  }
+  window.addEventListener('scroll', syncStrip, { passive: true });
+  window.addEventListener('resize', syncStrip);
+
   /* ---------- start ---------- */
   var saved = Book.store.get('lab.values', null);
   if (saved && typeof saved === 'object') applyValues(saved);
@@ -459,4 +473,5 @@
   buildCup();
   buildSequenceStatic();
   render();
+  syncStrip();
 })();
